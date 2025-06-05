@@ -1,7 +1,7 @@
 #Pass.in
 O pass.in é uma aplicação de gestão de participantes em eventos presenciais.
 
-A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição.
+A ferramenta permite que o organizador cadastre um evento.
 
 Os participantes inscritos podem emitir uma credencial para check-in no dia do evento.
 
@@ -22,11 +22,12 @@ O sistema fará um scan da credencial do participante para permitir a entrada no
  O participante só pode realizar check-in em um evento uma única vez;
  
 ##Diagrama do banco de dados
+
 erDiagram
     events ||--o{ attendees : "1-N"
     attendees ||--o| check_ins : "1-1 (unique)"
 
-    events {
+   events {
         TEXT id PK "Identificador único"
         TEXT title "Título do evento"
         TEXT details "Detalhes (opcional)"
@@ -34,7 +35,7 @@ erDiagram
         INTEGER maximum_attendees "Máximo de participantes"
     }
     
-    attendees {
+   attendees {
         INTEGER id PK "ID autoincrement"
         TEXT name "Nome do participante"
         TEXT email "E-mail"
@@ -42,7 +43,7 @@ erDiagram
         DATETIME created_at "Data de criação"
     }
     
-    check_ins {
+   check_ins {
         INTEGER id PK "ID autoincrement"
         DATETIME created_at "Data do check-in"
         INTEGER attendeeId FK,UK "Chave estrangeira única para attendees"
